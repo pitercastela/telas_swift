@@ -38,6 +38,7 @@ struct SpaceTypeCardView: View {
 }
 
 // Tela Principal de Tipos de Espaço
+
 struct SelectSpaceTypeView: View {
     
     let darkGreen = Color(red: 0.12, green: 0.29, blue: 0.16)
@@ -53,7 +54,7 @@ struct SelectSpaceTypeView: View {
                     Button(action: {
                         // Lógica de sair
                     }) {
-                        Image(systemName: "door.right.hand.open")
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
                             .resizable().scaledToFit().frame(width: 22, height: 22).foregroundColor(.white)
                     }
                 }
@@ -88,13 +89,13 @@ struct SelectSpaceTypeView: View {
                         .buttonStyle(PlainButtonStyle())
                         
                         // 2. Botão Poliesportiva -> Navegaria para outra lista (coloquei Text vazio por enquanto)
-                        NavigationLink(destination: Text("Lista Poliesportiva")) {
+                        NavigationLink(destination: SelectPoliesportivaView()) {
                             SpaceTypeCardView(title: "Quadra poliesportiva", subtitle: "3 Disponíveis", iconName: "iconCourt")
                         }
                         .buttonStyle(PlainButtonStyle())
                         
                         // 3. Botão Futebol -> Navegaria para outra lista
-                        NavigationLink(destination: Text("Lista Campo de Futebol")) {
+                        NavigationLink(destination: SelectFutebolView()) {
                             SpaceTypeCardView(title: "Campo de futebol", subtitle: "2 Disponíveis", iconName: "iconSoccer")
                         }
                         .buttonStyle(PlainButtonStyle())
@@ -109,8 +110,3 @@ struct SelectSpaceTypeView: View {
     }
 }
 
-struct SelectSpaceTypeView_Previews: PreviewProvider {
-    static var previews: some View {
-        SelectSpaceTypeView()
-    }
-}

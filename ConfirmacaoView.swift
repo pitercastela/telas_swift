@@ -69,9 +69,3 @@ struct ConfirmationView: View { // Correção aplicada: sem a palavra 'some' aqu
     }
 }
 
-// Preview para visualização no Xcode
-struct ConfirmationView_Previews: PreviewProvider {
-    static var previews: some View {
-        ConfirmationView()
-    }
-}

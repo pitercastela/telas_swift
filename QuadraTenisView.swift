@@ -7,36 +7,41 @@ struct SpaceModel: Identifiable {
     let imageName: String // Nome da imagem nos seus Assets (ex: "tennisCourt")
 }
 
-// 2. Componente do Cartão (SpaceCardView)
+// 2. Componente do Cartão (SpaceCardView) DEFINITIVO
 struct SpaceCardView: View {
     let space: SpaceModel
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            // Imagem ajustada para preencher o espaço sem distorcer
+            // IMAGEM DE FUNDO ATUALIZADA
             Image(space.imageName)
                 .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(maxWidth: .infinity, minHeight: 100, maxHeight: 100) // Limita a altura da imagem
-                .clipped() // Corta o excesso
-            
-            // Fundo escuro com o texto sobreposto
+                .scaledToFill() // Garante que a imagem preencha, cortando se necessário
+                // Força a imagem a ter a altura total do cartão (120)
+                .frame(height: 120)
+                // CRÍTICO: Força a imagem a preencher toda a largura disponível
+                .frame(maxWidth: .infinity)
+                .clipped() // Corta o excesso de imagem que transbordar
+                .cornerRadius(10) // Aplica os cantos arredondados na imagem interna
+
+            // TEXTO SOBREPOSTO
             Text(space.name)
-                .font(.system(size: 14, weight: .regular, design: .serif))
+                .font(.system(size: 18, weight: .regular, design: .serif))
                 .foregroundColor(.white)
-                .padding(.vertical, 3)
-                .padding(.horizontal, 10)
+                .multilineTextAlignment(.center)
+                .padding(.vertical, 4)
+                .padding(.horizontal, 12)
                 .background(Color.black.opacity(0.7))
-                .padding(.bottom, 6)
+                .padding(.bottom, 8)
         }
-        .frame(height: 100)  // Altura controlada do cartão
-        .cornerRadius(8)      // Bordas arredondadas
-        .overlay(            // Borda preta
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.black, lineWidth: 1.5)
+        .frame(height: 120) // Define a altura total do cartão (container)
+        .cornerRadius(10)   // Aplica o raio em todo o cartão
+        .overlay(           // Borda preta em volta de todo o cartão
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(Color.black, lineWidth: 2)
         )
-        .padding(.horizontal)
-        .padding(.vertical, 4)
+        .padding(.horizontal) // Padding externo para separação lateral
+        .padding(.vertical, 6)   // Padding externo para separação vertical
     }
 }
 
@@ -68,7 +73,7 @@ struct SelectSpaceView: View {
                 Button(action: {
                     // Lógica de sair
                 }) {
-                    Image(systemName: "door.right.hand.open")
+                    Image(systemName: "rectangle.portrait.and.arrow.right")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 22, height: 22)
@@ -124,9 +129,4 @@ struct SelectSpaceView: View {
     }
 }
 
-// Preview para o Xcode
-struct SelectSpaceView_Previews: PreviewProvider {
-    static var previews: some View {
-        SelectSpaceView()
-    }
-}
+
